@@ -8,7 +8,7 @@ $totaluri = $uri->getTotalSegments();
         <a href="<?= site_url(); ?>" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
     </li>
     <li class="menu-header">Menu</li>
-    <?php if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'employee') : ?>
+    <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan' || session('role') == 'employee') : ?>
         <li class="nav-item dropdown <?= $uri->getSegment(1) == 'surat' && $uri->getSegment(2) == 'keluar' ? 'active' : ''; ?>">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-envelope"></i> <span>Surat Keluar</span></a>
             <ul class="dropdown-menu">

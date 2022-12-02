@@ -155,11 +155,11 @@
                         </div>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="customCheck1" name="copy" value="1">
-                            <label class="custom-control-label" for="customCheck1">Copy <small style="color:red"> (Centang jika ingin copy booking)</small></label>
+                            <label class="custom-control-label" for="customCheck1">Copy <small style="color:red"> (Centang jika ingin menginput ruang/hari/jam lain dengan acara yang sama)</small></label>
                         </div>
                     </div>
-                    <input type="hidden" class="form-control " id="pembuat" value="<?= session('id'); ?>" name="createdBy" maxlength="128">
-
+                    <input type="hidden" class="form-control " id="pembuat" value="<?= session('id') ? session('id') : '0'; ?>" name="createdBy" maxlength="128">
+                    <input type="hidden" class="form-control " id="token" value="<?= NULL; ?>" name="token">
                     <div class="card-footer">
                         <button type="reset" class="btn btn-secondary"> Reset </button>
                         <button type="submit" class="btn btn-primary float-right"> <i class="fa fa-paper-plane"></i> Simpan </button>

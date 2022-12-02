@@ -14,6 +14,7 @@ class Home extends BaseController
         $data['masuk'] = $this->db->table('surat_masuk')->getWhere(['deleted_at' => NULL])->getNumRows();
         $data['keluar'] = $this->db->table('surat_keluar')->getWhere(['deleted_at' => NULL])->getNumRows();
         $data['roombooking'] = $this->room->getNewBooking();
+        $data['roomverified'] = $this->room->getNewVerified();
 
         return view('home', $data);
     }

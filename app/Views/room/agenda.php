@@ -139,7 +139,6 @@
             }
             Swal.fire({
                 title: split[0],
-                text: date + ', Pukul : <br>' + start + ' - ' + end,
                 html: js_thml(),
                 showConfirmButton: false,
                 //   confirmButtonColor: '#3085d6',

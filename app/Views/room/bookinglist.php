@@ -78,7 +78,7 @@
                             </ul>
                             <div class="tab-content tab-bordered" id="myTab3Content">
                                 <?php $actived = 'show active';
-                                if (session('role') == 'admin' || session('role') == 'manager') {
+                                if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan') {
                                     $actived = ''; ?>
                                     <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
                                         <?= $this->include('room/bookingnew'); ?>

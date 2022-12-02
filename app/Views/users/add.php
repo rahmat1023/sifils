@@ -34,6 +34,7 @@
                         <select class="form-control" name="role">
                             <option value="admin">Admin</option>
                             <option value="manager">Manager</option>
+                            <option value="pimpinan">Pimpinan</option>
                             <option value="employee">Tendik</option>
                             <option value="satpam">Satpam</option>
                             <option value="user">User</option>

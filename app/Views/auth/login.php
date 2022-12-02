@@ -14,6 +14,8 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/components.css">
+    <link rel="shortcut icon" href="<?= base_url() ?>/favicon.ico" />
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -80,7 +82,10 @@
                                 <?php endif; ?>
                             </div>
                             <div class="card-footer">
-                                <a href="<?= site_url('availability'); ?>" class="btn btn-primary float-right">Cek Ketersediaan Ruang</a>
+                                <a href="<?= site_url('room/booking'); ?>" class="btn btn-primary float-right ml-1">Booking Ruang</a>
+                                <a href="<?= site_url('availability'); ?>" class="btn btn-primary float-right ml-1">Cek Ketersediaan Ruang</a>
+                                <a href="<?= site_url('cekstatus'); ?>" class="btn btn-primary float-right">Cek Status Booking</a>
+
                             </div>
                         </div>
                     </div>

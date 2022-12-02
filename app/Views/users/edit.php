@@ -35,6 +35,7 @@
                         <select class="form-control" name="role">
                             <option value="admin" <?= $user->role == 'admin' ? 'selected' : ''; ?>>Admin</option>
                             <option value="manager" <?= $user->role == 'manager' ? 'selected' : ''; ?>>Manager</option>
+                            <option value="pimpinan" <?= $user->role == 'pimpinan' ? 'selected' : ''; ?>>Pimpinan</option>
                             <option value="employee" <?= $user->role == 'employee' ? 'selected' : ''; ?>>Tendik</option>
                             <option value="satpam" <?= $user->role == 'satpam' ? 'selected' : ''; ?>>Satpam</option>
                             <option value="user" <?= $user->role == 'user' ? 'selected' : ''; ?>>User</option>

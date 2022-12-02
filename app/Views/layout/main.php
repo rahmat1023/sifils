@@ -26,6 +26,7 @@
     <script src="<?= base_url() ?>/stisla/assets/js/stisla.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>/stisla/node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
     <!-- <script type="text/javascript" src="<?= base_url() ?>/stisla/node_modules/sweetalert/dist/sweetalert.min.js"></script> -->
+    <link rel="shortcut icon" href="<?= base_url() ?>/favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale-all.js"></script>
 
@@ -45,21 +46,23 @@
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="<?= base_url() ?>/stisla/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, <?= session('name'); ?></div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, <?= session('name') ? session('name') : 'Guest'; ?></div>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 0 min ago</div>
-                            <a href="#" class="dropdown-item has-icon text-capitalize">
-                                <i class="far fa-user"></i> <?= session('role'); ?>
-                            </a>
-                            <a href="<?= site_url('changepass'); ?>" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Ganti Password
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="<?= site_url('logout'); ?>" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
+                        <?php if (session('id')) : ?>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-title">Logged in 0 min ago</div>
+                                <a href="#" class="dropdown-item has-icon text-capitalize">
+                                    <i class="far fa-user"></i> <?= session('role'); ?>
+                                </a>
+                                <a href="<?= site_url('changepass'); ?>" class="dropdown-item has-icon">
+                                    <i class="fas fa-cog"></i> Ganti Password
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="<?= site_url('logout'); ?>" class="dropdown-item has-icon text-danger">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </nav>
@@ -71,14 +74,16 @@
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="index.html">SF</a>
                     </div>
-
-                    <?= $this->include('layout/menu'); ?>
+                    <?php
+                    if (session('id')) {
+                        echo $this->include('layout/menu');
+                    } else {
+                        echo $this->include('layout/menu-public');
+                    } ?>
 
                 </aside>
             </div>
-
             <?= $this->renderSection('content'); ?>
-
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; <?= date('Y'); ?> <div class="bullet"></div> <a href="https://filsafat.ugm.ac.id/">Rahmat A</a>
@@ -89,7 +94,6 @@
             </footer>
         </div>
     </div>
-
     <!-- General JS Scripts -->
 
 

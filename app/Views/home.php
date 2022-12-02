@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if (session('role') == 'admin' || session('role') == 'manager') : ?>
+                <?php if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'pimpinan') : ?>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
                             <div class="card-icon bg-success">
@@ -103,7 +103,7 @@
                         <div class="mt-4">
                             <a href="<?= site_url('changepass'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-key"></i>Ganti Password</a>
                             <a href="<?= site_url('room/index'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-calendar"></i>Lihat Agenda</a>
-                            <?php if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'employee') : ?>
+                            <?php if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'employee' || session('role') == 'pimpinan') : ?>
                                 <a href="<?= site_url('surat/keluar/add'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-envelope"></i>Ambil Nomor Surat</a>
                                 <a href="<?= site_url('room/booking'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-th"></i>Booking Ruang</a>
                             <?php endif; ?>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <?php if ((session('role') == 'admin' || session('role') == 'manager') && count($roombooking) > 0) : ?>
+            <?php if ((session('role') == 'admin' || session('role') == 'manager' || session('role') == 'pimpinan') && (count($roombooking) > 0 || count($roomverified) > 0)) : ?>
                 <div class="card card-primary">
                     <div class="card-header">
                         <h4>Booking Baru</h4>

@@ -78,7 +78,7 @@ class Filters extends BaseConfig
             [
                 '',
                 'room',
-                'room/*',
+                'room/bookinglist',
                 'surat',
                 'surat/*',
             ]

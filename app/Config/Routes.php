@@ -74,10 +74,15 @@ $routes->post('room/delete/(:num)', 'Room::delete/$1');
 $routes->post('room/update/(:num)', 'Room::update/$1');
 $routes->get('room/reject/(:num)', 'Room::reject/$1');
 $routes->get('room/accept/(:num)', 'Room::accept/$1');
+$routes->get('room/verifikasi/(:num)', 'Room::verifikasi/$1');
 $routes->get('room/booking', 'Room::booking');
 $routes->get('room/bookinglist', 'Room::bookinglist');
+$routes->get('room/bookingsuccess', 'Room::bookingsuccess');
 $routes->get('room/availability', 'Room::availability');
+$routes->get('booking', 'Room::guestbooking');
 $routes->post('checkroom', 'Room::checkRoomAvailability');
+$routes->get('cekstatus', 'Room::cekStatus');
+$routes->post('checkstatus', 'Room::checkStatus');
 
 $routes->presenter('unit', ['filters' => 'isAdmin']);
 $routes->presenter('ruang', ['filters' => 'isAdmin']);
