@@ -27,6 +27,7 @@ class RoomModel extends Model
         'proposal',
         'token',
         'biaya',
+        'reject',
         'verified_at',
         'accepted_at',
         'createdBy',

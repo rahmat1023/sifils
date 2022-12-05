@@ -94,6 +94,8 @@
             </footer>
         </div>
     </div>
+    <?= $this->include('room/modaltarif'); ?>
+    <?= $this->include('room/modaltolak'); ?>
     <!-- General JS Scripts -->
 
 

@@ -36,7 +36,9 @@
                             <td><?= $row->name; ?></td>
                         <?php } ?>
                         <td><a href="https://wa.me/62<?= $row->phone; ?>"><?= $row->pic; ?></a></td>
-                        <td><?= $row->ruangname; ?></td>
+                        <td><?= $row->ruangname; ?> <?php if ($row->biaya > 0) {
+                                                        helper('number');
+                                                    ?> <span class="badge badge-primary"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?></td>
                         <td><?= date('d-m-Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
                         <td><?= $row->creator; ?></td>
                         <td><span class="badge badge-<?= $color; ?>"><?= $row->status; ?></span></td>

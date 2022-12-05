@@ -28,20 +28,21 @@
                             <td><?= $row->name; ?></td>
                         <?php } ?>
                         <td><a href="https://wa.me/62<?= $row->phone; ?>"><?= $row->pic; ?></a></td>
-                        <td><?= $row->ruangname; ?></td>
+                        <td><?= $row->ruangname; ?> <?php if ($row->biaya > 0) {
+                                                        helper('number');
+                                                    ?> <span class="badge badge-primary"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?> </td>
                         <td><?= date('d-m-Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
                         <td><?= $row->creator; ?></td>
                         <td><span class="badge badge-<?= $row->status == 'booking' ? 'warning' : 'primary'; ?>"><?= $row->status; ?></span></td>
                         <td>
                             <?php
-                            if (session('role') == 'manager') $acc = 'accept';
-                            else $acc = 'verifikasi';
-                            if (session('role') == 'admin') {
+                            if (session('role') == 'admin' || session('role') == 'manager') {
                             ?>
-                                <a href="<?= site_url('room/accept/' . $row->id); ?>" class="btn btn-success" title="Terima2"> <i class="fa fa-check"></i> </a>
+                                <a href="<?= site_url('room/accept/' . $row->id); ?>" class="btn btn-success" title="Terima"> <i class="fa fa-check"></i> </a>
+                            <?php } elseif (session('role') == 'pimpinan') { ?>
+                                <a href="#" class="btn btn-success btn-verify" data-id="<?= $row->id; ?>" title="Verifikasi" data-toggle="modal" data-target="#verifyModal"> <i class="fa fa-check"></i> </a>
                             <?php } ?>
-                            <a href="<?= site_url('room/' . $acc . '/' . $row->id); ?>" class="btn btn-success" title="Terima"> <i class="fa fa-check"></i> </a>
-                            <a href="<?= site_url('room/reject/' . $row->id); ?>" class="btn btn-warning" title="Tolak"> <i class="fa fa-times"></i> </a>
+                            <a href="#" class="btn btn-warning btn-reject" data-id="<?= $row->id; ?>" title="Tolak" data-toggle="modal" data-target="#rejectModal"> <i class="fa fa-times"></i> </a>
                             <a href="<?= site_url('room/edit/' . $row->id); ?>" class="btn btn-primary" title="Edit"> <i class="fa fa-pencil-alt"></i> </a>
                             <form action="<?= site_url('room/delete/' . $row->id); ?>" method="POST" class="d-inline" onsubmit="return confirm('Hapus Booking Ruang ?')">
                                 <?= csrf_field(); ?>

@@ -173,11 +173,14 @@ class Room extends BaseController
         }
     }
 
-    public function verifikasi($id)
+    public function verifikasi()
     {
         if (session('role') == 'admin' || session('role') == 'pimpinan') {
+            $data['biaya'] = $this->request->getPost('biaya');
+            $id = $this->request->getPost('id');
             $data['status'] = 'terverifikasi';
             $data['verified_at'] = date('Y-m-d H:i:s');
+            // print_r($data);
             $this->room->update($id, $data);
             return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil memverifikasi Peminjaman Ruang!');
         } else {
@@ -185,12 +188,17 @@ class Room extends BaseController
         }
     }
 
-    public function reject($id)
+    public function reject()
     {
-        if (session('role') == 'admin' || session('role') == 'manager') {
+        if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'pimpinan') {
+            $data['reject'] = $this->request->getPost('reject');
+            $id = $this->request->getPost('id');
             $data['status'] = 'ditolak';
+            if (session('role') == 'pimpinan') {
+                $data['verified_at'] = date('Y-m-d H:i:s');
+            }
             $data['accepted_at'] = date('Y-m-d H:i:s');
-
+            print_r($data);
             $this->room->update($id, $data);
             return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil menolak Peminjaman Ruang!');
         } else {

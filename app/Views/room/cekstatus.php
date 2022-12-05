@@ -101,6 +101,7 @@
                                     $accepted_icon = 'times';
                                 }
                                 if ($room->verified_at == NULL) $verified = 'secondary';
+                                elseif ($room->status == 'ditolak') $verified = 'danger';
                                 else $verified = 'primary';  ?>
                                 <div class="card-body">
                                     <div class="col-12">
@@ -119,7 +120,15 @@
                                             </div>
                                             <div class="activity">
                                                 <div class="activity-icon bg-<?= $verified; ?> text-white shadow-<?= $verified; ?>">
-                                                    <i class="fas fa-<?= $room->verified_at ? 'check' : 'spinner'; ?>"></i>
+                                                    <i class="fas fa-<?php if ($room->verified_at) {
+                                                                            if ($room->status != 'ditolak') {
+                                                                                echo 'check';
+                                                                            } else {
+                                                                                echo 'times';
+                                                                            }
+                                                                        } else {
+                                                                            echo 'spinner';
+                                                                        } ?>"></i>
                                                 </div>
                                                 <div class="activity-detail">
                                                     <div class="mb-2">
