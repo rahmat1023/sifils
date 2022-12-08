@@ -62,7 +62,7 @@
                                 <?php
                                 $selected = 'true';
                                 $navlink = 'active';
-                                if (session('role') == 'admin' || session('role')  == 'manager') {
+                                if (session('role') == 'admin' || session('role')  == 'manager' || session('role') == 'pimpinan') {
                                     $selected = 'false';
                                     $navlink = ''; ?>
                                     <li class="nav-item">

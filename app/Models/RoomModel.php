@@ -27,6 +27,7 @@ class RoomModel extends Model
         'proposal',
         'token',
         'biaya',
+        'balasan',
         'reject',
         'verified_at',
         'accepted_at',
@@ -100,7 +101,7 @@ class RoomModel extends Model
         $builder->join('unit', 'unit.id = room.unit');
         $builder->join('users', 'users.id = room.createdBy');
         $builder->where('room.token', $token);
-        $query = $builder->get()->getRow();
+        $query = $builder->get()->getResult();
         return $query;
     }
 
@@ -133,5 +134,13 @@ class RoomModel extends Model
         $builder->where('DATE_ADD(room.start, INTERVAL 1 MINUTE) <=', $data['end']);
         $query = $builder->get()->getRow();
         return $query;
+    }
+
+    function verifyByToken($data)
+    {
+        $builder = $this->db->table('room');
+        $builder->set($data);
+        $builder->where('token', $data['token']);
+        $builder->update();
     }
 }

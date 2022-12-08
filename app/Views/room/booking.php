@@ -34,6 +34,7 @@
                                     <!-- <input type="text" class="form-control" name="proposal" value="<?= old('proposal') ?>" readonly> -->
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="file" name="proposal" value="<?= old('proposal') ?>">
+                                        <input type="hidden" class="form-control" name="proposalcopy" value=''>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 .PDF
@@ -72,7 +73,7 @@
                             <div class="form-group col-12 col-lg-4">
                                 <label>Nama Unit</label>
                                 <select class="form-control" name="unit" id="unit" required>
-                                    <option selected>-Pilih Unit-</option>
+                                    <option value="">-Pilih Unit-</option>
                                     <?php foreach ($unit as $option) { ?>
                                         <option value="<?= $option->id; ?>" <?= old('unit') == $option->id ? 'selected' : ''; ?>><?= $option->name; ?></option>
                                     <?php } ?>
@@ -118,7 +119,7 @@
                             <div class="form-group col-12 col-lg-4">
                                 <label>Ruang</label>
                                 <select class="form-control select2" name="ruang" id="ruang" required>
-                                    <option selected>-Pilih Ruang-</option>
+                                    <option value="">-Pilih Ruang-</option>
                                     <?php foreach ($ruang as $option) { ?>
                                         <option value="<?= $option->id; ?>" <?= old('ruang') == $option->id ? 'selected' : ''; ?>><?= $option->name; ?></option>
                                     <?php } ?>

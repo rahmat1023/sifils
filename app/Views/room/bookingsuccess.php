@@ -37,7 +37,7 @@
                 <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Login ke Sistem</h4>
+                            <h4>Detail Booking</h4>
                         </div>
 
                         <div class="card-body">

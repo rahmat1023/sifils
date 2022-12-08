@@ -84,6 +84,15 @@
                                     </address>
                                 </div>
                             </div>
+                            <?php if ($keluar->file) : ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong>File Surat:</strong><br>
+                                        <iframe src="<?= base_url('files/suratkeluar/' . $keluar->file); ?>" width="100%" height="500px">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

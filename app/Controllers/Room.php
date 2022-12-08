@@ -53,7 +53,7 @@ class Room extends BaseController
         $data['unit'] = $this->unit->findAll();
         $data['ruang'] = $this->ruang->findAll();
         $data['room'] = $this->room->getBooking($id);
-        if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'manager' || ($data['room']->createdBy == session('id') && $data['room']->status != 'diterima')) {
+        if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'manager' ||  ($data['room']->createdBy == session('id') && $data['room']->status == 'booking')) {
             return view('room/editbooking', $data);
         } else {
             return redirect()->to(site_url('room/bookinglist'))->with('error', 'Anda tidak berhak melakukan ini');
@@ -67,6 +67,8 @@ class Room extends BaseController
         if ($proposal->isValid() && !$proposal->hasMoved()) {
             $data['proposal'] = $proposal->getRandomName();
             $proposal->move('files/proposal', $data['proposal']);
+        } elseif ($data['proposalcopy']) {
+            $data['proposal'] = $data['proposalcopy'];
         } else {
             $data['proposal'] = '';
         }
@@ -85,8 +87,6 @@ class Room extends BaseController
         if ($isOverlap) {
             return redirect()->back()->withInput()->with('error', $isOverlap->ruangname . ' sudah dibooking untuk kegiatan ' . $isOverlap->name . ' pada tanggal ' . date('d-m-Y', strtotime($date)) . ' jam ' .  date('H:i', strtotime($isOverlap->start)) . ' - ' . date('H:i', strtotime($isOverlap->end)) . '. Silahkan pilih Ruang/Hari/Jam lain!');
         } else {
-            print_r($data);
-
             $this->room->insert($data);
             if ($this->request->getVar('copy') == 1) {
                 return redirect()->to(site_url('room/copybooking/' . $this->room->insertID()))->with('success', 'Berhasil booking Ruang!');
@@ -143,12 +143,16 @@ class Room extends BaseController
             $data['proposal'] = $proposal->getRandomName();
             $proposal->move('files/proposal', $data['proposal']);
         }
+        $balasan = $this->request->getFile('balasan');
+        if ($balasan->isValid() && !$balasan->hasMoved()) {
+            $data['balasan'] = $balasan->getRandomName();
+            $balasan->move('files/balasan', $data['balasan']);
+        }
         $date = $data['tanggal'];
         $start = $data['start'];
         $end = $data['end'];
         $data['start'] =  date('Y-m-d H:i:s', strtotime("$date $start"));
         $data['end'] =  date('Y-m-d H:i:s', strtotime("$date $end"));
-        $data['status'] =  'booking';
         $isOverlap = $this->room->checkAvailability($data);
         d($isOverlap);
         if ($isOverlap != null && $isOverlap->id != $id) {
@@ -176,6 +180,7 @@ class Room extends BaseController
     public function verifikasi()
     {
         if (session('role') == 'admin' || session('role') == 'pimpinan') {
+
             $data['biaya'] = $this->request->getPost('biaya');
             $id = $this->request->getPost('id');
             $data['status'] = 'terverifikasi';
@@ -183,6 +188,25 @@ class Room extends BaseController
             // print_r($data);
             $this->room->update($id, $data);
             return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil memverifikasi Peminjaman Ruang!');
+        } else {
+            return redirect()->to(site_url('room/bookinglist'))->with('error', 'Anda tidak berhak melakukan ini');
+        }
+    }
+
+    public function verifikasiToken()
+    {
+        if (session('role') == 'admin' || session('role') == 'pimpinan') {
+
+            $data['biaya'] = $this->request->getPost('biaya');
+            $data['token'] = $this->request->getPost('token');
+            $data['status'] = 'terverifikasi';
+            $data['verified_at'] = date('Y-m-d H:i:s');
+            $this->room->verifyByToken($data);
+            // print_r($data);
+            if ($this->room->affectedRow() > 0) {
+                return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil memverifikasi Peminjaman Ruang!');
+            }
+            return redirect()->to(site_url('room/bookinglist'))->with('error', 'Gagal memverifikasi Peminjaman Ruang!');
         } else {
             return redirect()->to(site_url('room/bookinglist'))->with('error', 'Anda tidak berhak melakukan ini');
         }
@@ -254,5 +278,24 @@ class Room extends BaseController
         } else {
             return redirect()->back()->withInput()->with('error', 'Token ' . $token . ' tidak ditemukan');
         }
+    }
+
+
+    public function uploadbalasan($id)
+    {
+        $data['title'] = 'Upload Balasan Peminjaman Ruang';
+        $data['id'] = $id;
+        return view('room/uploadbalasan', $data);
+    }
+
+    public function postuploadbalasan($id)
+    {
+        $balasan = $this->request->getFile('balasan');
+        if ($balasan->isValid() && !$balasan->hasMoved()) {
+            $data['balasan'] = $balasan->getRandomName();
+            $balasan->move('files/balasan', $data['balasan']);
+        }
+        $this->room->update($id, $data);
+        return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil mengunggah surat balasan Peminjaman Ruang!');
     }
 }

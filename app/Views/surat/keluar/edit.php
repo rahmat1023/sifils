@@ -108,6 +108,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="file">File Surat</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="file" name="file" value="<?= old('file') ?>">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    .PDF
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="nourut" value="" <?= $keluar->nourut; ?>>
                 </div>
                 <div class="card-footer">

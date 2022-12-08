@@ -65,7 +65,10 @@
                                             <td><?= $row->tanggal; ?></td>
                                             <td><?= $row->pembuatname; ?></td>
                                             <td>
-                                                <?php if (session('role') == 'admin' || session('id') == $row->pembuat) : ?>
+                                                <?php if (session('role') == 'admin' || session('id') == $row->pembuat) :
+                                                    if (!$row->file) : ?>
+                                                        <a href="<?= site_url('surat/keluar/upload/' . $row->id); ?>" class="btn btn-info" title="Upload"> <i class="fa fa-upload"></i> </a>
+                                                    <?php endif; ?>
                                                     <a href="<?= site_url('surat/keluar/edit/' . $row->id); ?>" class="btn btn-primary" title="Edit"> <i class="fa fa-pencil-alt"></i> </a>
                                                     <a href="<?= site_url('surat/keluar/delete/' . $row->id); ?>" class="btn btn-danger" title="Hapus" onclick="return confirm('Hapus Surat ?')"><i class="fa fa-trash"></i></a>
                                                 <?php endif; ?>

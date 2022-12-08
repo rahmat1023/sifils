@@ -57,6 +57,16 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                                <?php if (session()->getFlashdata('error')) : ?>
+                                    <div class="alert alert-danger alert-dismissible show fade">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">
+                                                <span>×</span>
+                                            </button>
+                                            <?= session()->getFlashdata('error'); ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
                                 <?php if (session()->getFlashdata('success')) : ?>
                                     <div class="alert alert-success alert-dismissible show fade">
                                         <div class="alert-body">
@@ -78,8 +88,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="file">Proposal</label>
-                                                        <input type="text" class="form-control" name="proposal" value="<?= $room->proposal; ?>" readonly>
+                                                        <label for="file">Proposal : <?= $room->proposal ? '(sudah terupload)' : ''; ?></label>
+                                                        <input type="file" class="form-control" name="proposal" value="<?= $room->proposal; ?>" readonly>
                                                     </div>
                                                 </div>
 

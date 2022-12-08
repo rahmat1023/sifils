@@ -84,96 +84,117 @@
                                 </form>
                             </div>
                         </div>
-                        <?php if ($room) : ?>
+                        <?php if ($room) {
+                        ?>
                             <div class="class card card-primary">
                                 <div class="card-header">
-                                    <h4>Status Booking <?= $room->name; ?> (PIC : <?= $room->pic; ?>) </h4>
+                                    <h4>Status Booking <?= $room[0]->name; ?> (PIC : <?= $room[0]->pic; ?>) </h4>
                                 </div>
-                                <?php
-                                if ($room->accepted_at == NULL) {
-                                    $accepted = 'secondary';
-                                    $accepted_icon = 'spinner';
-                                } elseif ($room->status == 'diterima') {
-                                    $accepted = 'primary';
-                                    $accepted_icon = 'check';
-                                } else {
-                                    $accepted = 'danger';
-                                    $accepted_icon = 'times';
-                                }
-                                if ($room->verified_at == NULL) $verified = 'secondary';
-                                elseif ($room->status == 'ditolak') $verified = 'danger';
-                                else $verified = 'primary';  ?>
                                 <div class="card-body">
-                                    <div class="col-12">
-                                        <div class="activities">
-                                            <div class="activity">
-                                                <div class="activity-icon bg-primary text-white shadow-primary">
-                                                    <i class="fas fa-check"></i>
+                                    <div id="accordion">
+                                        <?php $i = 0;
+                                        $tarif = 0;
+                                        foreach ($room as $data) {
+                                            $i++;
+                                            if ($data->accepted_at == NULL) {
+                                                $accepted = 'secondary';
+                                                $accepted_icon = 'spinner';
+                                            } elseif ($data->status == 'diterima') {
+                                                $accepted = 'primary';
+                                                $accepted_icon = 'check';
+                                            } else {
+                                                $accepted = 'danger';
+                                                $accepted_icon = 'times';
+                                            }
+                                            if ($data->verified_at == NULL) $verified = 'secondary';
+                                            elseif ($data->status == 'ditolak') $verified = 'danger';
+                                            else $verified = 'primary'; ?>
+                                            <div class="accordion">
+                                                <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-<?= $i ?>" aria-expanded="<?= $i == 1 ? 'true' : 'false' ?>">
+                                                    <h4><?= $data->ruangname; ?> | <?= date('d-m-Y', strtotime($data->start)); ?>, <?= date('H:i', strtotime($data->start)) . '-' . date('H:i', strtotime($data->end)); ?></h4>
                                                 </div>
-                                                <div class="activity-detail">
-                                                    <div class="mb-2">
-                                                        <span class="text-job"><?= $room->created_at; ?></span>
-                                                        <span class="bullet"></span>
-                                                        <a class="text-job" href="#">Diajukan oleh <?= $room->createdBy == 0 ? $room->pic : $room->creator; ?></a>
+                                                <div class="accordion-body collapse <?= $i == 1 ? 'show' : '' ?>" id="panel-body-<?= $i ?>" data-parent="#accordion">
+                                                    <div class="activities">
+                                                        <div class="activity">
+                                                            <div class="activity-icon bg-primary text-white shadow-primary">
+                                                                <i class="fas fa-check"></i>
+                                                            </div>
+                                                            <div class="activity-detail">
+                                                                <div class="mb-2">
+                                                                    <span class="text-job"><?= $data->created_at; ?></span>
+                                                                    <span class="bullet"></span>
+                                                                    <a class="text-job" href="#">Diajukan oleh <?= $data->createdBy == 0 ? $data->pic : $data->creator; ?></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="activity">
+                                                            <div class="activity-icon bg-<?= $verified; ?> text-white shadow-<?= $verified; ?>">
+                                                                <i class="fas fa-<?php if ($data->verified_at) {
+                                                                                        if ($data->status != 'ditolak') {
+                                                                                            echo 'check';
+                                                                                        } else {
+                                                                                            echo 'times';
+                                                                                        }
+                                                                                    } else {
+                                                                                        echo 'spinner';
+                                                                                    } ?>"></i>
+                                                            </div>
+                                                            <div class="activity-detail">
+                                                                <div class="mb-2">
+                                                                    <span class="text-job"><?= $data->verified_at; ?></span>
+                                                                    <span class="bullet"></span>
+                                                                    <a class="text-job" href="#">Verifikasi Oleh Wakil Dekan II</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="activity">
+                                                            <div class="activity-icon bg-<?= $accepted; ?> text-white shadow-<?= $accepted; ?>">
+                                                                <i class="fas fa-<?= $accepted_icon ?>"></i>
+                                                            </div>
+                                                            <div class="activity-detail">
+                                                                <div class="mb-2">
+                                                                    <span class="text-job"><?= $data->accepted_at; ?></span>
+                                                                    <span class="bullet"></span>
+                                                                    <a class="text-job" href="#">Acc oleh Kepala Kantor</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="activity">
+                                                            <div class="activity-icon bg-<?= $accepted; ?> text-white shadow-<?= $accepted; ?>">
+                                                                <i class="fas fa-<?= $accepted_icon ?>"></i>
+                                                            </div>
+                                                            <div class="activity-detail">
+                                                                <div class="mb-2">
+                                                                    <span class="text-job"><?= $data->accepted_at; ?></span>
+                                                                    <span class="bullet"></span>
+                                                                    <?php if ($data->accepted_at) : ?>
+                                                                        <a class="text-job" href="#">Acara <?= $data->status == 'diterima' ? 'Diterima' : 'Ditolak'; ?></a>
+                                                                    <?php else : ?>
+                                                                        <a class="text-job" href="#">Acara Terpublish/Ditolak</a>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <?php if ($data->biaya > 0) {
+                                                        $tarif += $data->biaya;
+                                                        helper('number'); ?>
+                                                        <div class="card-footer">Tarif : <span class="badge badge-info"><?= number_to_currency($data->biaya, 'IDR', 'id_ID', 0); ?></span></div>
+                                                    <?php } ?>
+                                                    <?php if ($data->reject) : ?>
+                                                        <div class="card-footer">Alasan ditolak : <?= $data->reject; ?></div>
+                                                    <?php endif; ?>
+                                                    <?php if ($data->balasan) : ?>
+                                                        <div class="card-footer"><a href="<?= base_url('files/balasan/' . $data->balasan); ?>" class="btn btn-primary">Lihat Surat Balasan</a></div>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
-                                            <div class="activity">
-                                                <div class="activity-icon bg-<?= $verified; ?> text-white shadow-<?= $verified; ?>">
-                                                    <i class="fas fa-<?php if ($room->verified_at) {
-                                                                            if ($room->status != 'ditolak') {
-                                                                                echo 'check';
-                                                                            } else {
-                                                                                echo 'times';
-                                                                            }
-                                                                        } else {
-                                                                            echo 'spinner';
-                                                                        } ?>"></i>
-                                                </div>
-                                                <div class="activity-detail">
-                                                    <div class="mb-2">
-                                                        <span class="text-job"><?= $room->verified_at; ?></span>
-                                                        <span class="bullet"></span>
-                                                        <a class="text-job" href="#">Verifikasi Oleh Wakil Dekan II</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="activity">
-                                                <div class="activity-icon bg-<?= $accepted; ?> text-white shadow-<?= $accepted; ?>">
-                                                    <i class="fas fa-<?= $accepted_icon ?>"></i>
-                                                </div>
-                                                <div class="activity-detail">
-                                                    <div class="mb-2">
-                                                        <span class="text-job"><?= $room->accepted_at; ?></span>
-                                                        <span class="bullet"></span>
-                                                        <a class="text-job" href="#">Acc oleh Kepala Kantor</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="activity">
-                                                <div class="activity-icon bg-<?= $accepted; ?> text-white shadow-<?= $accepted; ?>">
-                                                    <i class="fas fa-<?= $accepted_icon ?>"></i>
-                                                </div>
-                                                <div class="activity-detail">
-                                                    <div class="mb-2">
-                                                        <span class="text-job"><?= $room->accepted_at; ?></span>
-                                                        <span class="bullet"></span>
-                                                        <?php if ($room->accepted_at) : ?>
-                                                            <a class="text-job" href="#">Acara <?= $room->status == 'diterima' ? 'Diterima' : 'Ditolak'; ?></a>
-                                                        <?php else : ?>
-                                                            <a class="text-job" href="#">Acara Terpublish/Ditolak</a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php } ?>
+                                        <?= $tarif; ?>
                                     </div>
                                 </div>
-                                <?php if ($room->reject) : ?>
-                                    <div class="card-footer">Alasan ditolak : <?= $room->reject; ?></div>
-                                <?php endif; ?>
                             </div>
-                        <?php endif; ?>
+                        <?php }; ?>
                     </div>
                 </div>
                 <div class="simple-footer">

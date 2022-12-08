@@ -61,7 +61,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="form-group col-12 col-lg-4">
@@ -148,9 +147,21 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <input type="hidden" class="form-control " id="pembuat" value="<?= session('id'); ?>" name="createdBy" maxlength="128">
+                    <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan' || session('surat') == 1) { ?>
 
+                        <div class="form-group">
+                            <label for="file">Surat balasan</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="file" name="balasan" value="<?= old('balasan') ?>">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        .PDF
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
                 <div class="card-footer">
                     <button type="reset" class="btn btn-secondary"> Reset </button>
                     <button type="submit" class="btn btn-primary float-right"> <i class="fa fa-paper-plane"></i> Simpan </button>

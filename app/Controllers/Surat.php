@@ -106,6 +106,7 @@ class Surat extends BaseController
         return redirect()->to(site_url('surat/masuk/'))->with('success', 'Berhasil mengubah surat masuk!');
     }
 
+
     public function addkeluar()
     {
         $data['title'] = 'Ambil Nomor Susun Surat Keluar';
@@ -201,6 +202,11 @@ class Surat extends BaseController
     public function updatekeluar($id)
     {
         $data = $this->request->getPost();
+        $file = $this->request->getFile('file');
+        if ($file->isValid() && !$file->hasMoved()) {
+            $data['file'] = $file->getRandomName();
+            $file->move('files/suratkeluar', $data['file']);
+        }
         $data['nourut'] = $this->keluar->find($id)->nourut;
         $tahun = date('Y', strtotime($data['tanggal']));
         $data['tahun'] = $tahun;
@@ -213,5 +219,30 @@ class Surat extends BaseController
         $this->keluar->update($id, $data);
 
         return redirect()->to(site_url('surat/keluar/invoice/' . $this->keluar->$id))->with('success', 'Berhasil mengambil nomor surat!');
+    }
+
+
+    public function uploadkeluar($id)
+    {
+        $data['title'] = 'Upload File Surat Keluar';
+        $data['keluar'] = $this->keluar->find($id);
+        if (session('role') == 'admin' || session('surat') == 1 || session('id') == $data['keluar']->pembuat) {
+            return view('surat/keluar/uploadsurat', $data);
+        } else {
+            return redirect()->to(site_url())->with('error', 'Anda tidak berhak melakukan ini');
+        }
+    }
+
+    public function processuploadkeluar($id)
+    {
+        $file = $this->request->getFile('file');
+        if ($file->isValid() && !$file->hasMoved()) {
+            $data['file'] = $file->getRandomName();
+            $file->move('files/suratkeluar', $data['file']);
+            $this->keluar->update($id, $data);
+            return redirect()->to(site_url('surat/keluar/invoice/' . $id))->with('success', 'Berhasil mengupload surat!');
+        } else {
+            return redirect()->back()->with('error', 'upload gagal');
+        }
     }
 }

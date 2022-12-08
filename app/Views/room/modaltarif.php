@@ -1,5 +1,5 @@
     <!-- Modal Add Product-->
-    <form action="<?= site_url('room/verifikasi'); ?>" method="POST" autocomplete="off">
+    <form action="<?= site_url('room/verifikasi'); ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
         <?= csrf_field(); ?>
         <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -15,11 +15,14 @@
                             <label>Tarif <small>(Kosongkan bila tidak berbayar)</small></label>
                             <input type="number" class="form-control" name="biaya" placeholder="Tarif">
                         </div>
+
                     </div>
+
                     <div class="modal-footer">
                         <input type="hidden" name="id" class="roomid">
+                        <input type="hidden" name="token" class="roomtoken">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Verifikasi</button>
                     </div>
                 </div>
             </div>
@@ -29,7 +32,9 @@
         $(document).ready(function() {
             $('.btn-verify').on('click', function() {
                 const id = $(this).data('id');
+                const token = $(this).data('token');
                 $('.roomid').val(id);
+                $('.roomtoken').val(token);
                 $('#verifyModal').modal('show');
             });
 

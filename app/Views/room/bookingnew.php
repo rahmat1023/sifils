@@ -30,7 +30,7 @@
                         <td><a href="https://wa.me/62<?= $row->phone; ?>"><?= $row->pic; ?></a></td>
                         <td><?= $row->ruangname; ?> <?php if ($row->biaya > 0) {
                                                         helper('number');
-                                                    ?> <span class="badge badge-primary"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?> </td>
+                                                    ?> <span class="badge badge-info"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?> </td>
                         <td><?= date('d-m-Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
                         <td><?= $row->creator; ?></td>
                         <td><span class="badge badge-<?= $row->status == 'booking' ? 'warning' : 'primary'; ?>"><?= $row->status; ?></span></td>
@@ -40,7 +40,7 @@
                             ?>
                                 <a href="<?= site_url('room/accept/' . $row->id); ?>" class="btn btn-success" title="Terima"> <i class="fa fa-check"></i> </a>
                             <?php } elseif (session('role') == 'pimpinan') { ?>
-                                <a href="#" class="btn btn-success btn-verify" data-id="<?= $row->id; ?>" title="Verifikasi" data-toggle="modal" data-target="#verifyModal"> <i class="fa fa-check"></i> </a>
+                                <a href="#" class="btn btn-success btn-verify" data-id="<?= $row->id; ?>" data-token="<?= $row->token; ?>" title="Verifikasi" data-toggle="modal" data-target="#verifyModal"> <i class="fa fa-check"></i> </a>
                             <?php } ?>
                             <a href="#" class="btn btn-warning btn-reject" data-id="<?= $row->id; ?>" title="Tolak" data-toggle="modal" data-target="#rejectModal"> <i class="fa fa-times"></i> </a>
                             <a href="<?= site_url('room/edit/' . $row->id); ?>" class="btn btn-primary" title="Edit"> <i class="fa fa-pencil-alt"></i> </a>
