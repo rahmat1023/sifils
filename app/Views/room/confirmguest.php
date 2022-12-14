@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Booking Success | SiFilsafat</title>
+    <title>Guest Booking | SiFilsafat</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/select2/dist/css/select2.css">
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
+    <link rel="stylesheet" href="<?= base_url() ?>/css/step.css">
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/components.css">
     <script>
@@ -32,40 +34,25 @@
         <section class="section">
             <div class="container mt-5">
                 <div class="login-brand">
-                    Booking Berhasil !
+                    <a href="<?= site_url() ?>"> SiFilsafat v2 </a>
+                    <!-- <img src="<?= base_url() ?>/stisla/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle"> -->
                 </div>
-                <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h4>Detail Booking</h4>
-                        </div>
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    Kode Booking Anda
-                                </div>
-                                <div class="float-right mr-2">
-                                    <span class="badge badge-primary"><?= session()->getFlashdata('token') ?></span>
-                                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6 offset-lg-3">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <a href="<?= site_url(); ?>" class="btn btn-primary btn-lg"> <i class="fa fa-arrow-left"></i> Kembali</a>
+                                <div class="p-2"></div>
+                                <h4><?= $title ?></h4>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col">
-                                    Simpan Kode Booking anda untuk melacak status peminjaman ruang.
-                                </div>
+                            <div class="card-body">
+                                <span>Jika Anda Mahasiswa Fakultas Filsafat, Silakan <a href="<?= site_url('inputnim'); ?>">buat akun </a> atau <a href="<?= site_url('login'); ?>">login </a>.</span> <br>
+                                <span>Jika bukan, silakan <a href="<?= site_url('room/booking'); ?>">Booking Sebagai Tamu</a></span>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="<?= site_url() ?>" class="btn btn-primary"> <i class="fa fa-arrow-left"></i> Kembali</a>
-
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-
-                </div>
-
-
                 <div class="simple-footer">
                     Copyright &copy; 2022-<?= date('Y'); ?> | Rahmat Alfianto @ IT Filsafat UGM
                 </div>
@@ -77,6 +64,7 @@
     <!-- General JS Scripts -->
     <script src="<?= base_url() ?>/stisla/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
     <script src="<?= base_url() ?>/stisla/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->

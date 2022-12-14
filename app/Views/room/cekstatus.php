@@ -198,7 +198,7 @@
                     </div>
                 </div>
                 <div class="simple-footer">
-                    Copyright &copy; 2022 | Rahmat A
+                    Copyright &copy; 2022-<?= date('Y'); ?> | Rahmat Alfianto @ IT Filsafat UGM
                 </div>
             </div>
         </section>

@@ -72,9 +72,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link <?= $navlink ?>" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile" aria-selected="<?= $selected; ?>">Daftar Booking Saya</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact" aria-selected="false">Daftar Semua Booking</a>
-                                </li>
+                                <?php if (session('roleid') < 5) : ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact" aria-selected="false">Daftar Semua Booking</a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                             <div class="tab-content tab-bordered" id="myTab3Content">
                                 <?php $actived = 'show active';
@@ -87,9 +89,11 @@
                                 <div class="tab-pane fade <?= $actived; ?>" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                     <?= $this->include('room/bookingbyuser'); ?>
                                 </div>
-                                <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
-                                    <?= $this->include('room/bookingall'); ?>
-                                </div>
+                                <?php if (session('roleid') < 5) : ?>
+                                    <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
+                                        <?= $this->include('room/bookingall'); ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

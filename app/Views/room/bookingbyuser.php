@@ -47,6 +47,9 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
+                                <?php if ($row->balasan) { ?>
+                                    <a href="<?= base_url('files/balasan/' . $row->balasan); ?>" class="btn btn-info" title="Lihat Surat Balasan"> <i class="fa fa-eye"></i> </a>
+                                <?php } ?>
                             </td>
                         <?php } else {
                             echo '<td></td>';

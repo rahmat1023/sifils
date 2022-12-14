@@ -53,6 +53,23 @@ class RoomModel extends Model
         return $query;
     }
 
+    function getAcceptedBooking($id = null)
+    {
+        $builder = $this->db->table('room');
+        $builder->select('room.*, room_ruang.name as ruangname, room_ruang.color as backgroundColor , unit.kode as kodeunit , users.name as creator, users.id as userid');
+        $builder->join('room_ruang', 'room_ruang.id = room.ruang');
+        $builder->join('unit', 'unit.id = room.unit');
+        $builder->join('users', 'users.id = room.createdBy');
+        if ($id) {
+            $builder->where('users.id', $id);
+        }
+        $builder->where('room.deleted_at', NULL);
+        $builder->where('room.status', 'diterima');
+        $builder->orderBy('id', 'desc');
+        $query = $builder->get()->getResult();
+        return $query;
+    }
+
     function getNewVerified()
     {
         $builder = $this->db->table('room');

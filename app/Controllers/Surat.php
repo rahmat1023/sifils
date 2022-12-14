@@ -51,7 +51,7 @@ class Surat extends BaseController
     public function keluar()
     {
         $data['title'] = 'Daftar Surat Keluar';
-        $data['keluar'] = $this->keluar->getAll();
+        $data['keluar'] = $this->keluar->getAll(date('Y'));
         return view('surat/keluar/index', $data);
     }
 
@@ -119,18 +119,22 @@ class Surat extends BaseController
 
     public function insertkeluar()
     {
-        $data = $this->request->getPost();
-        $data['nourut'] = $this->keluar->getLastNomor()->nourut + 1;
-        $tahun = date('Y', strtotime($data['tanggal']));
-        $data['tahun'] = $tahun;
-        $pengesah = $this->pengesah->find($data['pengesah'])->kode;
-        $perihal = $this->perihal->find($data['perihal'])->kode;
-        $unit = $this->unit->find($data['unit'])->kode;
-        $data['nosusun'] = $data['nourut'] . '/UN1/' . $pengesah . '/' . $unit . '/' . $perihal . '/' . $tahun;
-        // print_r($data['nosusun']);
-        $this->keluar->insert($data);
+        if (session('roleid') < 5) {
+            $data = $this->request->getPost();
+            $data['nourut'] = $this->keluar->getLastNomor()->nourut + 1;
+            $tahun = date('Y', strtotime($data['tanggal']));
+            $data['tahun'] = $tahun;
+            $pengesah = $this->pengesah->find($data['pengesah'])->kode;
+            $perihal = $this->perihal->find($data['perihal'])->kode;
+            $unit = $this->unit->find($data['unit'])->kode;
+            $data['nosusun'] = $data['nourut'] . '/UN1/' . $pengesah . '/' . $unit . '/' . $perihal . '/' . $tahun;
+            // print_r($data['nosusun']);
+            $this->keluar->insert($data);
 
-        return redirect()->to(site_url('surat/keluar/invoice/' . $this->keluar->insertID))->with('success', 'Berhasil mengambil nomor surat!');
+            return redirect()->to(site_url('surat/keluar/invoice/' . $this->keluar->insertID))->with('success', 'Berhasil mengambil nomor surat!');
+        } else {
+            return redirect()->to(site_url())->with('error', 'Anda tidak berhak melakukan ini');
+        }
     }
 
     public function insertbooking()

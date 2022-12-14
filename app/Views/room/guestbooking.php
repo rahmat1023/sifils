@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login | SiFilsafat</title>
+    <title>Booking | SiFilsafat</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 <div class="simple-footer">
-                    Copyright &copy; 2022 | Rahmat A
+                    Copyright &copy; 2022-<?= date('Y'); ?> | Rahmat Alfianto @ IT Filsafat UGM
                 </div>
             </div>
         </section>

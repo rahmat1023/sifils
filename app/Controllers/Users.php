@@ -56,7 +56,7 @@ class Users extends BaseController
         $data = $this->request->getPost();
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         unset($data['_method']);
-        $data['updated_at'] = now();
+        $data['updated_at'] = date('Y-m-d H:i:s');
         $this->db->table('users')->where(['id' => $id])->update($data);
 
         if ($this->db->affectedRows() > 0) {

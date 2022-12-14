@@ -49,6 +49,9 @@ $totaluri = $uri->getTotalSegments();
             <li class="<?= $uri->getSegment(1) == 'room' && $uri->getSegment(2) == 'bookinglist' ? 'active' : ''; ?>">
                 <a class="nav-link " href="<?= site_url('room/bookinglist'); ?>">Daftar Peminjaman</a>
             </li>
+            <li>
+                <a class="nav-link " href="<?= site_url('availability'); ?>">Cek Ketersediaan</a>
+            </li>
         </ul>
     </li>
     <?php if (session('role') == 'admin') { ?>
@@ -76,6 +79,9 @@ $totaluri = $uri->getTotalSegments();
         </li>
         <li <?= $uri->getSegment(1) == 'users' ? 'class="active"' : ''; ?>>
             <a href="<?= site_url('users'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>Daftar User</span></a>
+        </li>
+        <li <?= $uri->getSegment(1) == 'mahasiswa' ? 'class="active"' : ''; ?>>
+            <a href="<?= site_url('mahasiswa'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>Mahasiswa</span></a>
         </li>
     <?php } ?>
 

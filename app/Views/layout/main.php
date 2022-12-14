@@ -86,7 +86,7 @@
             <?= $this->renderSection('content'); ?>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; <?= date('Y'); ?> <div class="bullet"></div> <a href="https://filsafat.ugm.ac.id/">Rahmat A</a>
+                    Copyright &copy; <?= date('Y'); ?> <div class="bullet"></div> <a href="https://filsafat.ugm.ac.id/">Rahmat Alfianto</a>
                 </div>
                 <div class="footer-right">
                     Version 2.0

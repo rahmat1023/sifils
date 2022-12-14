@@ -82,7 +82,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="card-footer">
-                                <a href="<?= site_url('room/booking'); ?>" class="btn btn-primary float-right ml-1">Booking Ruang</a>
+                                <a href="<?= site_url('confirmguestbooking'); ?>" class="btn btn-primary float-right ml-1">Booking Ruang</a>
                                 <a href="<?= site_url('availability'); ?>" class="btn btn-primary float-right ml-1">Cek Ketersediaan Ruang</a>
                                 <a href="<?= site_url('cekstatus'); ?>" class="btn btn-primary float-right">Cek Status Booking</a>
 
@@ -103,6 +103,16 @@
                                                 <span>×</span>
                                             </button>
                                             <?= session()->getFlashdata('error'); ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                                <?php if (session()->getFlashdata('success')) : ?>
+                                    <div class="alert alert-primary alert-dismissible show fade">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">
+                                                <span>×</span>
+                                            </button>
+                                            <?= session()->getFlashdata('success'); ?>
                                         </div>
                                     </div>
                                 <?php endif ?>
@@ -131,13 +141,13 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="">Create One</a>
-                        </div> -->
+                        <div class="mt-5 text-muted text-center">
+                            Buat Akun Mahasiswa ? <a href="<?= site_url('inputnim'); ?>">Klik Disini</a>
+                        </div>
                     </div>
                 </div>
                 <div class="simple-footer">
-                    Copyright &copy; 2022 | Rahmat A
+                    Copyright &copy; 2022-<?= date('Y'); ?> | Rahmat Alfianto @ IT Filsafat UGM
                 </div>
             </div>
         </section>

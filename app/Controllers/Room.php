@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
 
 class Room extends BaseController
 {
@@ -15,7 +16,7 @@ class Room extends BaseController
     public function index()
     {
         $data['title'] = 'Agenda';
-        $room = $this->room->getListBooking();
+        $room = $this->room->getAcceptedBooking();
 
         foreach ($room as $key => $row) {
             $data['data'][$key]['title'] = $row->name . ' | ' . $row->ruangname;
@@ -31,7 +32,8 @@ class Room extends BaseController
             $data['data'][$key]['ket'] = $row->ket;
             $data['data'][$key]['backgroundColor'] = $row->backgroundColor;
         }
-        return view('room/agenda', $data);
+        if (session('roleid < 6')) return view('room/agenda', $data);
+        else return view('room/agendapublic', $data);
     }
 
     public function booking()
@@ -45,6 +47,12 @@ class Room extends BaseController
         } else {
             return view('room/guestbooking', $data);
         }
+    }
+
+    public function confirmguestbooking()
+    {
+        $data['title'] = 'Booking Sebagai Tamu ?';
+        return view('room/confirmguest', $data);
     }
 
     public function edit($id)
@@ -74,6 +82,10 @@ class Room extends BaseController
         }
 
         $date = $data['tanggal'];
+        $time = Time::createFromFormat('Y-m-d', $date);
+        if ((date_diff($time, Time::now())->days < 1) && session('role') != 'admin' && session('role') != 'manager') {
+            return redirect()->back()->withInput()->with('error', 'Booking ruang minimal 2 hari sebelum acara');
+        }
         $start = $data['start'];
         $end = $data['end'];
         $data['start'] =  date('Y-m-d H:i:s', strtotime("$date $start"));

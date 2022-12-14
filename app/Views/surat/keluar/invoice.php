@@ -84,7 +84,7 @@
                                     </address>
                                 </div>
                             </div>
-                            <?php if ($keluar->file) : ?>
+                            <?php if ($keluar->file && (session('id') == $keluar->pembuat || session('id') == 'admin')) : ?>
                                 <div class="row">
                                     <div class="col-12">
                                         <strong>File Surat:</strong><br>
