@@ -155,7 +155,8 @@ class Surat extends BaseController
     public function invoicekeluar($id)
     {
         $data['title'] = 'Nomor Susun Surat Keluar';
-        $data['keluar'] = $this->keluar->getAll($id)[0];
+        $data['keluar'] = $this->keluar->getByID($id);
+        // print_r($data['keluar']);
         return view('surat/keluar/invoice', $data);
     }
 
@@ -207,6 +208,7 @@ class Surat extends BaseController
     {
         $data = $this->request->getPost();
         $file = $this->request->getFile('file');
+        // print_r($file);
         if ($file->isValid() && !$file->hasMoved()) {
             $data['file'] = $file->getRandomName();
             $file->move('files/suratkeluar', $data['file']);
@@ -222,7 +224,7 @@ class Surat extends BaseController
         // print_r($data['nosusun']);
         $this->keluar->update($id, $data);
 
-        return redirect()->to(site_url('surat/keluar/invoice/' . $this->keluar->$id))->with('success', 'Berhasil mengambil nomor surat!');
+        return redirect()->to(site_url('surat/keluar/invoice/' . $id))->with('success', 'Berhasil mengambil nomor surat!');
     }
 
 
@@ -246,7 +248,7 @@ class Surat extends BaseController
             $this->keluar->update($id, $data);
             return redirect()->to(site_url('surat/keluar/invoice/' . $id))->with('success', 'Berhasil mengupload surat!');
         } else {
-            return redirect()->back()->with('error', 'upload gagal');
+            return redirect()->back()->with('error', 'Upload Gagal! Silahkan coba lagi.');
         }
     }
 }

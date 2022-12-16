@@ -7,7 +7,7 @@
             <h1><?= $title; ?></h1>
         </div>
         <div class="card col-12">
-            <form action="<?= site_url('surat/updatekeluar/' . $keluar->id); ?>" method="POST" autocomplete="off">
+            <form action="<?= site_url('surat/updatekeluar/' . $keluar->id); ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
                 <?= csrf_field(); ?>
                 <div class="card-body">
                     <div class="row">

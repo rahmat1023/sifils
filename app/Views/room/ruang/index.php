@@ -56,10 +56,10 @@
         <div class="section-body">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body p-0">
+                    <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-md">
-                                <tbody class="text-center">
+                            <table class="table table-striped" id="table-1">
+                                <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Ruang</th>
@@ -68,6 +68,8 @@
                                         <th>Kapasitas</th>
                                         <th style="width:15%">Action</th>
                                     </tr>
+                                </thead>
+                                <tbody class="text-center">
                                     <?php $i = 1;
                                     foreach ($ruang as $row) { ?>
                                         <tr>

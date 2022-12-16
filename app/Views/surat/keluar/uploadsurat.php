@@ -6,14 +6,13 @@
         <div class="section-header">
             <h1><?= $title; ?></h1>
         </div>
-        <?php if (session()->getFlashdata('data')) {
-            $room =  (object)session()->getFlashdata('data'); ?>
+        <?php if (session()->getFlashdata('error')) { ?>
             <div class="alert alert-danger alert-dismissible show fade">
                 <div class="alert-body">
                     <button class="close" data-dismiss="alert">
                         <span>×</span>
                     </button>
-                    <?= $error; ?>
+                    <?= session()->getFlashdata('error') ?>
                 </div>
             </div>
         <?php } ?>
@@ -24,7 +23,7 @@
                     <div class="form-group">
                         <label for="file">File Surat Nomor <?= $keluar->nosusun; ?></label>
                         <div class="input-group">
-                            <input type="file" class="form-control" id="file" name="file" value="<?= old('file') ?>">
+                            <input type="file" class="form-control" id="file" name="file" value="<?= old('file') ?>" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     .PDF

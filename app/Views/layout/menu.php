@@ -10,7 +10,7 @@ $totaluri = $uri->getTotalSegments();
     <li class="menu-header">Menu</li>
     <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan' || session('role') == 'employee') : ?>
         <li class="nav-item dropdown <?= $uri->getSegment(1) == 'surat' && $uri->getSegment(2) == 'keluar' ? 'active' : ''; ?>">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-envelope"></i> <span>Surat Keluar</span></a>
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-envelope-open-text"></i> <span>Surat Keluar</span></a>
             <ul class="dropdown-menu">
                 <li class="<?= $uri->getSegment(1) == 'surat' && $uri->getSegment(2) == 'keluar' && $uri->getSegment(3) == ''  ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?= site_url('surat/keluar'); ?>">Daftar Surat</a>
@@ -72,16 +72,16 @@ $totaluri = $uri->getTotalSegments();
             </ul>
         </li>
         <li <?= $uri->getSegment(1) == 'ruang'   ?  'class="active"' : ''; ?>>
-            <a href="<?= site_url('ruang'); ?>" class="nav-link"><i class="fa fa-building"></i> <span>Daftar Ruang</span></a>
+            <a href="<?= site_url('ruang'); ?>" class="nav-link"><i class="fa fa-building"></i> <span>Ruang</span></a>
         </li>
         <li <?= $uri->getSegment(1) == 'unit' ? 'class="active"' : ''; ?>>
-            <a href="<?= site_url('unit'); ?>" class="nav-link"><i class="fa fa-list-alt"></i> <span>Daftar Unit</span></a>
+            <a href="<?= site_url('unit'); ?>" class="nav-link"><i class="fa fa-list-alt"></i> <span>Unit</span></a>
         </li>
         <li <?= $uri->getSegment(1) == 'users' ? 'class="active"' : ''; ?>>
-            <a href="<?= site_url('users'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>Daftar User</span></a>
+            <a href="<?= site_url('users'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>User</span></a>
         </li>
         <li <?= $uri->getSegment(1) == 'mahasiswa' ? 'class="active"' : ''; ?>>
-            <a href="<?= site_url('mahasiswa'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>Mahasiswa</span></a>
+            <a href="<?= site_url('mahasiswa'); ?>" class="nav-link"><i class="fa fa-user-graduate"></i> <span>Mahasiswa</span></a>
         </li>
     <?php } ?>
 
