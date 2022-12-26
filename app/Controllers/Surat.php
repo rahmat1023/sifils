@@ -109,12 +109,13 @@ class Surat extends BaseController
 
     public function addkeluar()
     {
-        $data['title'] = 'Ambil Nomor Susun Surat Keluar';
-        $data['unit'] = $this->unit->findAll();
-        $data['perihal'] = $this->perihal->findAll();
-        $data['pengesah'] = $this->pengesah->where('hide', 0)->findAll();
-        $data['jenis'] = $this->jenis->findAll();
-        return view('surat/keluar/new', $data);
+        return redirect()->to('http://10.12.100.251/surat');
+        // $data['title'] = 'Ambil Nomor Susun Surat Keluar';
+        // $data['unit'] = $this->unit->findAll();
+        // $data['perihal'] = $this->perihal->findAll();
+        // $data['pengesah'] = $this->pengesah->where('hide', 0)->findAll();
+        // $data['jenis'] = $this->jenis->findAll();
+        // return view('surat/keluar/new', $data);
     }
 
     public function insertkeluar()
@@ -162,13 +163,15 @@ class Surat extends BaseController
 
     public function booking()
     {
-        $data['title'] = 'Booking Nomor Susun Surat Keluar';
-        if (session('role') != 'admin') {
-            $data['booking'] = $this->keluar->getBookingByUser(session('id'));
-        } else {
-            $data['booking'] = $this->keluar->getBooking();
-        }
-        return view('surat/keluar/booking', $data);
+        return redirect()->to('http://10.12.100.251/surat');
+
+        // $data['title'] = 'Booking Nomor Susun Surat Keluar';
+        // if (session('role') != 'admin') {
+        //     $data['booking'] = $this->keluar->getBookingByUser(session('id'));
+        // } else {
+        //     $data['booking'] = $this->keluar->getBooking();
+        // }
+        // return view('surat/keluar/booking', $data);
     }
 
     public function deletemasuk($id)
