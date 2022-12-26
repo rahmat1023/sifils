@@ -84,15 +84,18 @@
                                     </address>
                                 </div>
                             </div>
-                            <?php if ($keluar->file && (session('id') == $keluar->pembuat || session('id') == 'admin')) : ?>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <strong>File Surat:</strong><br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>File Surat:</strong><br>
+                                    <?php if ($keluar->file && (session('id') == $keluar->pembuat || session('id') == 'admin')) : ?>
                                         <iframe src="<?= base_url('files/suratkeluar/' . $keluar->file); ?>" width="100%" height="500px">
                                         </iframe>
-                                    </div>
+                                    <?php else : ?>
+                                        <a href="<?= site_url('surat/keluar/upload/' . $keluar->id); ?>" class="btn btn-primary" title="Upload Surat"> <i class="fa fa-upload"></i> Upload Surat </a>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
+                            </div>
+
                         </div>
                     </div>
                 </div>
