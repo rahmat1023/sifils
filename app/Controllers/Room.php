@@ -32,7 +32,7 @@ class Room extends BaseController
             $data['data'][$key]['ket'] = $row->ket;
             $data['data'][$key]['backgroundColor'] = $row->backgroundColor;
         }
-        if (session('roleid < 6')) return view('room/agenda', $data);
+        if (session('roleid') < 6) return view('room/agenda', $data);
         else return view('room/agendapublic', $data);
     }
 
