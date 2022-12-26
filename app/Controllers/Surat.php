@@ -163,13 +163,15 @@ class Surat extends BaseController
 
     public function booking()
     {
-        $data['title'] = 'Booking Nomor Susun Surat Keluar';
-        if (session('role') != 'admin') {
-            $data['booking'] = $this->keluar->getBookingByUser(session('id'));
-        } else {
-            $data['booking'] = $this->keluar->getBooking();
-        }
-        return view('surat/keluar/booking', $data);
+        return redirect()->to('http://10.12.100.251/surat');
+
+        // $data['title'] = 'Booking Nomor Susun Surat Keluar';
+        // if (session('role') != 'admin') {
+        //     $data['booking'] = $this->keluar->getBookingByUser(session('id'));
+        // } else {
+        //     $data['booking'] = $this->keluar->getBooking();
+        // }
+        // return view('surat/keluar/booking', $data);
     }
 
     public function deletemasuk($id)
