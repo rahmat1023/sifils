@@ -57,7 +57,7 @@ $totaluri = $uri->getTotalSegments();
     <?php if (session('role') == 'admin') { ?>
         <li class="menu-header">Panel Admin</li>
 
-        <li class="nav-item dropdown <?= ($uri->getSegment(1) == 'jenissurat' || $uri->getSegment(1) == 'pengesahsurat' || $uri->getSegment(1) == 'perihalsurat') ? 'active' : ''; ?>">
+        <li class="nav-item dropdown <?= ($uri->getSegment(1) == 'jenissurat' || $uri->getSegment(1) == 'pengesahsurat' || $uri->getSegment(1) == 'perihalsurat' || $uri->getSegment(1) == 'resetkeluar') ? 'active' : ''; ?>">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-envelope"></i> <span>Surat</span></a>
             <ul class="dropdown-menu">
                 <li class="<?= $uri->getSegment(1) == 'jenissurat' ? 'active' : ''; ?>">
@@ -68,6 +68,9 @@ $totaluri = $uri->getTotalSegments();
                 </li>
                 <li class="<?= $uri->getSegment(1) == 'pengesahsurat' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?= site_url('pengesahsurat'); ?>">Pengesah</a>
+                </li>
+                <li class="<?= $uri->getSegment(1) == 'resetkeluar' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?= site_url('resetkeluar'); ?>">Reset Nomor Keluar</a>
                 </li>
             </ul>
         </li>

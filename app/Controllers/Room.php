@@ -83,7 +83,7 @@ class Room extends BaseController
 
         $date = $data['tanggal'];
         $time = Time::createFromFormat('Y-m-d', $date);
-        if ((date_diff($time, Time::now())->days < 1) && session('role') != 'admin' && session('role') != 'manager') {
+        if ((date_diff($time, Time::now())->days < 1) && session('roleid') > 2) {
             return redirect()->back()->withInput()->with('error', 'Booking ruang minimal 2 hari sebelum acara');
         }
         $start = $data['start'];

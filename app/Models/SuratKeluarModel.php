@@ -22,6 +22,7 @@ class SuratKeluarModel extends Model
         $builder->join('surat_perihal', 'surat_perihal.id = surat_keluar.perihal');
         $builder->join('unit', 'unit.id = surat_keluar.unit');
         $builder->join('users', 'users.id = surat_keluar.pembuat');
+        $builder->where('surat_keluar.deleted_at', NULL);
         if ($tahun) {
             $builder->where('surat_keluar.tahun >=', $tahun);
         }
@@ -38,6 +39,7 @@ class SuratKeluarModel extends Model
         $builder->join('surat_perihal', 'surat_perihal.id = surat_keluar.perihal');
         $builder->join('unit', 'unit.id = surat_keluar.unit');
         $builder->join('users', 'users.id = surat_keluar.pembuat');
+        $builder->where('surat_keluar.deleted_at', NULL);
         $builder->where('surat_keluar.id =', $id);
         $builder->orderBy('surat_keluar.id', 'DESC');
         return $builder->get()->getRow();
@@ -70,6 +72,7 @@ class SuratKeluarModel extends Model
         $builder->select('surat_keluar.*, users.name as pembuatname');
         $builder->join('users', 'users.id = surat_keluar.pembuat');
         $builder->where('surat_keluar.status', 'booking');
+        $builder->where('surat_keluar.deleted_at', NULL);
         if ($id) {
             $builder->where('surat_keluar.pembuat', $id);
         }
@@ -87,6 +90,7 @@ class SuratKeluarModel extends Model
         $builder->join('users', 'users.id = surat_keluar.pembuat');
         $builder->where('surat_keluar.file', '');
         $builder->where('surat_keluar.tahun >', '2021');
+        $builder->where('surat_keluar.deleted_at', NULL);
         if ($id) {
             $builder->where('surat_keluar.pembuat', $id);
         }

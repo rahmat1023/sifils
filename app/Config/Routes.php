@@ -72,6 +72,8 @@ $routes->post('surat/updatekeluar/(:num)', 'Surat::updatekeluar/$1');
 $routes->post('surat/insertbooking', 'Surat::insertbooking');
 $routes->get('surat/keluar/add', 'Surat::addkeluar');
 $routes->get('surat/keluar/booking', 'Surat::booking');
+$routes->get('resetkeluar', 'Surat::resetKeluar');
+$routes->post('resetkeluar', 'Surat::resetKeluarProcess');
 $routes->get('pengesah/status/(:num)', 'PengesahSurat::status/$1');
 $routes->get('room/index', 'Room::index');
 $routes->get('room/edit/(:num)', 'Room::edit/$1');
