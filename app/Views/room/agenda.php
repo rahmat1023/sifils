@@ -130,7 +130,7 @@
                     tbl += '\t<tr>';
                     tbl += '\t  <th scope="row">Surat</th>';
                     tbl += '\t  <td>:</td>';
-                    tbl += '\t  <td style="text-align:left"><a class="btn btn-info btn-xs" href="' + window.location.origin + '/files/proposal/' + calEvent.proposal + '"><i class="fa fa-eye"></i> Lihat</a></td>';
+                    tbl += '\t  <td style="text-align:left"><a class="btn btn-info btn-xs" href="' + window.location.origin + '/sifilsafat/public/files/proposal/' + calEvent.proposal + '"><i class="fa fa-eye"></i> Lihat</a></td>';
                     tbl += '\t</tr>';
                 };
                 tbl += '  </tbody>';

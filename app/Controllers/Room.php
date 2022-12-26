@@ -90,7 +90,11 @@ class Room extends BaseController
         $end = $data['end'];
         $data['start'] =  date('Y-m-d H:i:s', strtotime("$date $start"));
         $data['end'] =  date('Y-m-d H:i:s', strtotime("$date $end"));
-        $data['status'] =  'booking';
+        if (session('roleid') < 3) {
+            $data['status'] =  'diterima';
+        } else {
+            $data['status'] =  'booking';
+        }
         if ($data['token'] == NULL) {
             $data['token'] = dechex(time());
         }

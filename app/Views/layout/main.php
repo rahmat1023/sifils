@@ -75,7 +75,7 @@
                         <a href="#">SF</a>
                     </div>
                     <?php
-                    if (session('id')) {
+                    if (base_url() == 'http://localhost:8080/') {
                         echo $this->include('layout/menu');
                     } else {
                         echo $this->include('layout/menu-public');
