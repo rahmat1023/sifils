@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1><?= $title; ?></h1>
+            <h1><?= $title; ?>  <a href="<?= site_url('surat/keluarall'); ?>" class="btn btn-sm btn-info"> <i class="fa fa-book"></i> Tampilkan Semua Surat </a></h1>
             <div class="section-header-breadcrumb">
                 <a href="<?= site_url('surat/keluar/booking'); ?>" class="btn btn-sm btn-success"> <i class="fa fa-book"></i> Booking Surat </a>
                 <div class="p-1"></div>

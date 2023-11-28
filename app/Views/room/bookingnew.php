@@ -31,7 +31,7 @@
                         <td><?= $row->ruangname; ?> <?php if ($row->biaya > 0) {
                                                         helper('number');
                                                     ?> <span class="badge badge-info"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?> </td>
-                        <td><?= date('d-m-Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
+                        <td><?= date('d M Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
                         <td><?= $row->creator; ?></td>
                         <td><span class="badge badge-<?= $row->status == 'booking' ? 'warning' : 'primary'; ?>"><?= $row->status; ?></span></td>
                         <td>

@@ -529,20 +529,50 @@ init:function(a){var c=this;a.on("selectItems.dt.DT",function(a,d,e){c.active(e=
 $("#table-1").dataTable({
     "columnDefs": [
       { "sortable": true, "targets": [0,2,3] }
-    ]
+    ],
+    dom: 'Blfrtip',
+    buttons: [
+       {  
+          extend: 'copy'
+       },
+       {
+          extend: 'pdf',
+          exportOptions: {
+            // columns: [0,1] // Column index which needs to export
+          }
+       },
+       {
+          extend: 'csv',
+       },
+       {
+          extend: 'excel',
+       } 
+     ] 
+
   });
 $("#table-2").dataTable({
     "columnDefs": [
       { "sortable": true, "targets": [0,2,3] }
-    ]
+    ],
+    buttons: [
+      'excel'
+  ]
   });
 $("#table-3").dataTable({
     "columnDefs": [
       { "sortable": true, "targets": [0,2,3] }
-    ]
+    ],
+    buttons: [
+      'excel'
+  ]
   });
 $("#table-4").dataTable({
     "columnDefs": [
       { "sortable": true, "targets": [0,2,3] }
-    ]
+    ],
+    buttons: [
+      'excel'
+  ]
   });
+
+

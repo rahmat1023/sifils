@@ -49,6 +49,7 @@
                             if (session('roleid')  == 6) : ?>
                                 <a href="<?= site_url('availability'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-check-double"></i>Cek Ketersediaan Ruang</a>
                                 <a href="<?= site_url('room/bookinglist'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-list"></i>Booking Saya</a>
+                                <a href="<?= base_url('files/Form_Peminjaman_Ruang.pdf'); ?>" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-file"></i>Format Proposal Peminjaman Ruang</a>
                             <?php endif; ?>
                         </div>
                     </div>

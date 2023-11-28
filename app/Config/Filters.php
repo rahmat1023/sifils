@@ -10,6 +10,7 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use \App\Filters\LoginFilter;
 use \App\Filters\AdminFilter;
+use \App\Filters\AdminRuangFilter;
 
 class Filters extends BaseConfig
 {
@@ -27,6 +28,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'isLoggedIn'    => LoginFilter::class,
         'isAdmin'       => AdminFilter::class,
+        'isAdminRuang'  => AdminRuangFilter::class,
     ];
 
     /**
@@ -81,6 +83,7 @@ class Filters extends BaseConfig
                 'room/bookinglist',
                 'surat',
                 'surat/*',
+                'changepass'
             ]
         ],
         'isAdmin' => [
@@ -89,14 +92,20 @@ class Filters extends BaseConfig
                 'users/*',
                 'unit',
                 'unit/*',
-                'ruang',
-                'ruang/*',
                 'surat/jenis',
                 'surat/jenis/*',
                 'surat/perihal',
                 'surat/perihal/*',
                 'surat/pengesah',
                 'surat/pengesah/*',
+                'keputusan',
+                'keputusan/*',
+            ]
+        ],
+        'isAdminRuang' => [
+            'before' => [
+                'ruang',
+                'ruang/*',
             ]
         ],
     ];

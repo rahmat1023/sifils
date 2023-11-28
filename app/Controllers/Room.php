@@ -61,7 +61,7 @@ class Room extends BaseController
         $data['unit'] = $this->unit->findAll();
         $data['ruang'] = $this->ruang->findAll();
         $data['room'] = $this->room->getBooking($id);
-        if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'manager' ||  ($data['room']->createdBy == session('id') && $data['room']->status == 'booking')) {
+        if (session('role') == 'admin' || session('role') == 'manager' || session('role') == 'manager' || session('surat') == 1 || ($data['room']->createdBy == session('id') && $data['room']->status == 'booking')) {
             return view('room/editbooking', $data);
         } else {
             return redirect()->to(site_url('room/bookinglist'))->with('error', 'Anda tidak berhak melakukan ini');
@@ -83,26 +83,32 @@ class Room extends BaseController
 
         $date = $data['tanggal'];
         $time = Time::createFromFormat('Y-m-d', $date);
-        if ((date_diff($time, Time::now())->days < 1) && session('roleid') > 2) {
+        if ((date_diff($time, Time::now())->days < 1) && session('roleid') > 4 ) {
             return redirect()->back()->withInput()->with('error', 'Booking ruang minimal 2 hari sebelum acara');
         }
         $start = $data['start'];
         $end = $data['end'];
         $data['start'] =  date('Y-m-d H:i:s', strtotime("$date $start"));
         $data['end'] =  date('Y-m-d H:i:s', strtotime("$date $end"));
-        if (session('roleid') < 3) {
-            $data['status'] =  'diterima';
-        } else {
+        if (session('roleid') > 4 || session('id') == NULL) {
             $data['status'] =  'booking';
+        } else {
+            $data['status'] =  'diterima';
+            $data['verified_at'] = date('Y-m-d H:i:s');
+            $data['accepted_at'] = date('Y-m-d H:i:s');
         }
         if ($data['token'] == NULL) {
             $data['token'] = dechex(time());
         }
         $isOverlap = $this->room->checkAvailability($data);
+        
 
         if ($isOverlap) {
             return redirect()->back()->withInput()->with('error', $isOverlap->ruangname . ' sudah dibooking untuk kegiatan ' . $isOverlap->name . ' pada tanggal ' . date('d-m-Y', strtotime($date)) . ' jam ' .  date('H:i', strtotime($isOverlap->start)) . ' - ' . date('H:i', strtotime($isOverlap->end)) . '. Silahkan pilih Ruang/Hari/Jam lain!');
-        } else {
+        } else if ($start >= $end) {
+            return redirect()->back()->withInput()->with('error', 'Jam mulai acara harus lebih awal dari jam berakhir');
+        }
+         else {
             $this->room->insert($data);
             if ($this->request->getVar('copy') == 1) {
                 return redirect()->to(site_url('room/copybooking/' . $this->room->insertID()))->with('success', 'Berhasil booking Ruang!');
@@ -159,11 +165,6 @@ class Room extends BaseController
             $data['proposal'] = $proposal->getRandomName();
             $proposal->move('files/proposal', $data['proposal']);
         }
-        $balasan = $this->request->getFile('balasan');
-        if ($balasan->isValid() && !$balasan->hasMoved()) {
-            $data['balasan'] = $balasan->getRandomName();
-            $balasan->move('files/balasan', $data['balasan']);
-        }
         $date = $data['tanggal'];
         $start = $data['start'];
         $end = $data['end'];
@@ -175,7 +176,12 @@ class Room extends BaseController
             $data['id'] = $id;
             $data['error'] = $isOverlap->ruangname . ' sudah dibooking untuk kegiatan ' . $isOverlap->name . ' pada tanggal ' . date('d-m-Y', strtotime($date)) . ' jam ' .  date('H:i', strtotime($isOverlap->start)) . ' - ' . date('H:i', strtotime($isOverlap->end)) . '. Silahkan pilih Ruang/Hari/Jam lain!';
             return redirect()->back()->with('data', $data);
-        } else {
+        }
+        else if ($start >= $end) {
+            $data['error'] = 'Jam mulai acara harus lebih awal dari jam berakhir';
+            return redirect()->back()->with('data', $data);
+        }
+        else {
             $this->room->update($id, $data);
             return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil mengubah Peminjaman Ruang!');
         }
@@ -313,5 +319,12 @@ class Room extends BaseController
         }
         $this->room->update($id, $data);
         return redirect()->to(site_url('room/bookinglist'))->with('success', 'Berhasil mengunggah surat balasan Peminjaman Ruang!');
+    }
+
+    public function xibo()
+    {
+        $data['booking'] = $this->room->getBookingToday();
+
+        return view('room/xibo', $data);
     }
 }

@@ -34,7 +34,7 @@
         <section class="section">
             <div class="container mt-5">
                 <div class="login-brand">
-                    SiFilsafat v2
+                    SiFilsafat
                     <!-- <img src="<?= base_url() ?>/stisla/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle"> -->
                 </div>
 

@@ -14,21 +14,32 @@
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/fullcalendar/dist/fullcalendar.min.css">
 
     <!-- Template CSS -->
+    <link href='https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/stisla/assets/css/components.css">
     <link rel="stylesheet" href="<?= base_url() ?>/css/custom.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/stisla/node_modules/izitoast/dist/css/iziToast.min.css">
     <script src="<?= base_url() ?>/stisla/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/nicescroll/dist/jquery.nicescroll.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/moment/min/moment.min.js"></script>
     <script src="<?= base_url() ?>/stisla/node_modules/select2/dist/js/select2.full.min.js"></script>
+    <script src="<?= base_url() ?>/stisla/node_modules/izitoast/dist/js/iziToast.min.js"></script>
     <script src="<?= base_url() ?>/stisla/assets/js/stisla.js"></script>
+    <script src="<?= base_url() ?>/js/chart.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>/stisla/node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
     <!-- <script type="text/javascript" src="<?= base_url() ?>/stisla/node_modules/sweetalert/dist/sweetalert.min.js"></script> -->
     <link rel="shortcut icon" href="<?= base_url() ?>/favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale-all.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 
 </head>
 
@@ -101,6 +112,8 @@
 
     <!-- JS Libraies -->
 
+    
+
 
     <!-- Template JS File -->
     <script src="<?= base_url() ?>/stisla/assets/js/scripts.js"></script>
@@ -108,6 +121,8 @@
 
     <!-- Page Specific JS File -->
     <script src="<?= base_url() ?>/js/js.js"></script>
+    <script src="<?= base_url() ?>/js/copy.js"></script>
+
 
 </body>
 

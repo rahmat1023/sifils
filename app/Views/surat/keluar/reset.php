@@ -38,7 +38,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Reset Mulai Nomor</span>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="1" name="number" aria-label="">
+                                    <input type="number" class="form-control" value="1" name="number" aria-label="" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">Reset Surat</button>
                                     </div>

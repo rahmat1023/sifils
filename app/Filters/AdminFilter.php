@@ -26,7 +26,9 @@ class AdminFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if (session('role') != 'admin') {
-            return redirect()->to(site_url());
+            if (session('role') != 'manager') {
+            return redirect()->to(site_url())->with('error', 'Anda tidak berhak melakukan ini!');
+            }
         }
     }
 

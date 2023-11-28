@@ -57,7 +57,7 @@
                         <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <label>Tanggal Surat</label>
-                                <input type="date" class="form-control" name="tanggal" value="<?= $keluar->tanggal; ?>" required>
+                                <input onkeydown="return false" type="date" class="form-control" name="tanggal" value="<?= $keluar->tanggal; ?>" required>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6">
@@ -91,13 +91,18 @@
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label>Sifat Surat</label>
-                                    <input type="text" class="form-control" name="sifat" value="<?= $keluar->sifat; ?>" required>
+                                    <select class="form-control" name="sifat" id="sifat" required>
+                                        <option value="Biasa" selected>Biasa</option>
+                                        <option value="Rahasia">Rahasia</option>
+                                        <option value="Sangat Rahasia">Sangat Rahasia</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label>Status</label>
-                                    <input type="text" class="form-control" name="status" value="<?= $keluar->status; ?>" required>
+                                    <input type="text" class="form-control" name="status" value="used" required>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +124,13 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="nourut" value="" <?= $keluar->nourut; ?>>
+                    <?php if(session('role')=='admin'):  ?>
+                    <div class="form-group">
+                        <label for="file">Pembuat</label>
+                        <input type="number" class="form-control" name="pembuat" value="<?= $keluar->pembuat; ?>" required>
+                    </div>
+                    <?php endif ?>
+                    <input type="hidden" name="nourut" value="<?= $keluar->nourut; ?>">
                 </div>
                 <div class="card-footer">
                     <button type="reset" class="btn btn-secondary"> Reset </button>

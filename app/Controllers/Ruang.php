@@ -21,8 +21,16 @@ class Ruang extends ResourcePresenter
      */
     public function index()
     {
+        $room = model('App\Models\RoomModel', false);
+        if (isset($_POST['date'])) {
+            $date = date("Y-m-d", strtotime($_POST['date']));
+        } else {
+            $date = date('Y-m-d' , strtotime('last monday'));
+        }
+        $data['room'] = $room->getListBookingByDate($date);
         $data['title'] = 'Daftar Ruang';
         $data['ruang'] = $this->model->findAll();
+        $data['date'] = $date;
 
         return view('room/ruang/index', $data);
     }
@@ -36,7 +44,13 @@ class Ruang extends ResourcePresenter
      */
     public function show($id = null)
     {
-        //
+        $room = model('App\Models\RoomModel', false);
+        $data['room'] = $room->getBookingHistoryById($id);
+
+        $ruang = $this->model->where('id', $id)->first();
+        $data['title'] = $ruang->name;
+        $data['ruang'] = $ruang;
+        return view('room/ruang/detail', $data);
     }
 
     /**

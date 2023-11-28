@@ -54,7 +54,7 @@ $totaluri = $uri->getTotalSegments();
             </li>
         </ul>
     </li>
-    <?php if (session('role') == 'admin') { ?>
+    <?php if (session('role') == 'admin' || session('role') == 'manager') { ?>
         <li class="menu-header">Panel Admin</li>
 
         <li class="nav-item dropdown <?= ($uri->getSegment(1) == 'jenissurat' || $uri->getSegment(1) == 'pengesahsurat' || $uri->getSegment(1) == 'perihalsurat' || $uri->getSegment(1) == 'resetkeluar') ? 'active' : ''; ?>">
@@ -80,9 +80,11 @@ $totaluri = $uri->getTotalSegments();
         <li <?= $uri->getSegment(1) == 'unit' ? 'class="active"' : ''; ?>>
             <a href="<?= site_url('unit'); ?>" class="nav-link"><i class="fa fa-list-alt"></i> <span>Unit</span></a>
         </li>
+        <?php if (session('role') == 'admin') { ?>
         <li <?= $uri->getSegment(1) == 'users' ? 'class="active"' : ''; ?>>
             <a href="<?= site_url('users'); ?>" class="nav-link"><i class="fa fa-users"></i> <span>User</span></a>
         </li>
+        <? } ?>
         <li <?= $uri->getSegment(1) == 'mahasiswa' ? 'class="active"' : ''; ?>>
             <a href="<?= site_url('mahasiswa'); ?>" class="nav-link"><i class="fa fa-user-graduate"></i> <span>Mahasiswa</span></a>
         </li>

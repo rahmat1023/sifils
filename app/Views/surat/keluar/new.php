@@ -6,8 +6,18 @@
         <div class="section-header">
             <h1><?= $title; ?></h1>
         </div>
+        <?php if (session()->getFlashdata('error')) : ?>
+            <div class="alert alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                        <span>×</span>
+                    </button>
+                    <?= session()->getFlashdata('error'); ?>
+                </div>
+            </div>
+        <?php endif ?>
         <div class="card col-12">
-            <form action="<?= site_url('surat/insertkeluar'); ?>" method="POST" autocomplete="off">
+            <form action="<?= site_url('surat/insertkeluar'); ?>" method="POST">
                 <?= csrf_field(); ?>
                 <div class="card-body">
                     <div class="row">
@@ -21,7 +31,7 @@
                             <div class="form-group">
                                 <label>Pejabat Pengesah</label>
                                 <select class="form-control" name="pengesah" id="pengesah" required>
-                                    <option selected>-Pilih Pengesah-</option>
+                                    <option value="" selected>-Pilih Pengesah-</option>
                                     <?php foreach ($pengesah as $option) { ?>
                                         <option value="<?= $option->id; ?>"><?= $option->name; ?> - <?= $option->jabatan; ?></option>
                                     <?php } ?>
@@ -34,7 +44,7 @@
                             <div class="form-group">
                                 <label>Jenis Surat</label>
                                 <select class="form-control" name="jenis" id="jenis" required>
-                                    <option selected>-Pilih Jenis-</option>
+                                    <option value="" selected>-Pilih Jenis-</option>
                                     <?php foreach ($jenis as $option) { ?>
                                         <option value="<?= $option->id; ?>"><?= $option->name; ?></option>
                                     <?php } ?>
@@ -45,7 +55,7 @@
                             <div class="form-group">
                                 <label>Unit Pengajuan</label>
                                 <select class="form-control" name="unit" id="unit" required>
-                                    <option selected>-Pilih Unit-</option>
+                                    <option value="" selected>-Pilih Unit-</option>
                                     <?php foreach ($unit as $option) { ?>
                                         <option value="<?= $option->id; ?>"><?= $option->name; ?></option>
                                     <?php } ?>
@@ -57,14 +67,14 @@
                         <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <label>Tanggal Surat</label>
-                                <input type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d'); ?>" required>
+                                <input onkeydown="return false" type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <label>Kode Perihal</label>
                                 <select class="form-control" name="perihal" id="perihal" required>
-                                    <option selected>-Pilih Perihal-</option>
+                                    <option value="" selected>-Pilih Perihal-</option>
                                     <?php foreach ($perihal as $option) { ?>
                                         <option value="<?= $option->id; ?>"><?= $option->name; ?></option>
                                     <?php } ?>

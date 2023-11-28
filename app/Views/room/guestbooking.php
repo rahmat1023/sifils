@@ -32,7 +32,7 @@
         <section class="section">
             <div class="container mt-5">
                 <div class="login-brand">
-                    <a href="<?= site_url() ?>"> SiFilsafat v2 </a>
+                    <a href="<?= site_url() ?>"> SiFilsafat </a>
                     <!-- <img src="<?= base_url() ?>/stisla/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle"> -->
                 </div>
 
@@ -167,7 +167,7 @@
                                                 </div>
                                                 <div class="form-group col-12 col-lg-4">
                                                     <label>Tanggal</label>
-                                                    <input type="date" class="form-control" name="tanggal" value="<?= old('tanggal'); ?>" required>
+                                                    <input onkeydown="return false" type="date" class="form-control" name="tanggal" value="<?= old('tanggal'); ?>" required>
                                                 </div>
                                                 <div class="form-group col-6 col-lg-2">
                                                     <label>Waktu Mulai</label>

@@ -40,13 +40,13 @@
                         <td><?= $row->ruangname; ?> <?php if ($row->biaya > 0) {
                                                         helper('number');
                                                     ?> <span class="badge badge-info"><?= number_to_currency($row->biaya, 'IDR', 'id_ID', 0); ?></span> <?php } ?></td>
-                        <td><?= date('d-m-Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
+                        <td><?= date('d M Y', strtotime($row->start)) . '<br>' . date('H:i', strtotime($row->start)) . '-' . date('H:i', strtotime($row->end)); ?></td>
                         <td><?= $row->creator; ?></td>
                         <td><?= $row->token; ?></td>
                         <td><span class="badge badge-<?= $color; ?>"><?= $row->status; ?></span></td>
                         <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan' || session('surat') == 1) { ?>
                             <td>
-                                <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan') { ?>
+                                <?php if (session('role') == 'admin' || session('role') == 'manager'  || session('role') == 'pimpinan' || session('surat') == 1) { ?>
                                     <a href="<?= site_url('room/edit/' . $row->id); ?>" class="btn btn-primary" title="Edit"> <i class="fa fa-pencil-alt"></i> </a>
                                     <form action="<?= site_url('room/delete/' . $row->id); ?>" method="POST" class="d-inline" onsubmit="return confirm('Hapus Booking Ruang ?')">
                                         <?= csrf_field(); ?>

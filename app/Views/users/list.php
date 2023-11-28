@@ -62,6 +62,7 @@
                                 <tbody class="text-center">
                                     <tr>
                                         <th>#</th>
+                                        <th>ID</th>
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>No. Handphone</th>
@@ -73,6 +74,7 @@
                                     foreach ($users as $row) { ?>
                                         <tr>
                                             <td><?= $i++; ?></td>
+                                            <td><?= $row->id; ?></td>
                                             <td><?= $row->name; ?></td>
                                             <td><?= $row->email; ?></td>
                                             <td><?= $row->phone; ?></td>

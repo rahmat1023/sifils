@@ -15,6 +15,7 @@ class SuratKeluarModel extends Model
 
     function getAll($tahun = null)
     {
+        $userid = session('id');
         $builder = $this->db->table('surat_keluar');
         $builder->select('surat_keluar.*, surat_jenis.name as jenisname, surat_pengesah.name as pengesahname, unit.name as unitname, surat_perihal.name as perihalname, users.name as pembuatname');
         $builder->join('surat_jenis', 'surat_jenis.id = surat_keluar.jenis');
@@ -23,9 +24,13 @@ class SuratKeluarModel extends Model
         $builder->join('unit', 'unit.id = surat_keluar.unit');
         $builder->join('users', 'users.id = surat_keluar.pembuat');
         $builder->where('surat_keluar.deleted_at', NULL);
+        if (session('id')!=1){
+            $builder->where("surat_keluar.sifat != 'Rahasia'  OR surat_keluar.pembuat = '$userid'");
+        }
         if ($tahun) {
             $builder->where('surat_keluar.tahun >=', $tahun);
         }
+        
         $builder->orderBy('surat_keluar.id', 'DESC');
         return $builder->get()->getResult();
     }

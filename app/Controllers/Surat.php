@@ -50,8 +50,15 @@ class Surat extends BaseController
 
     public function keluar()
     {
-        $data['title'] = 'Daftar Surat Keluar';
+        $data['title'] = 'Daftar Surat Keluar Tahun ' . date('Y');
         $data['keluar'] = $this->keluar->getAll(date('Y'));
+        return view('surat/keluar/index', $data);
+    }
+
+    public function keluarall()
+    {
+        $data['title'] = 'Daftar Surat Keluar';
+        $data['keluar'] = $this->keluar->getAll();
         return view('surat/keluar/index', $data);
     }
 
@@ -109,13 +116,12 @@ class Surat extends BaseController
 
     public function addkeluar()
     {
-        return redirect()->to('http://10.12.100.251/surat');
-        // $data['title'] = 'Ambil Nomor Susun Surat Keluar';
-        // $data['unit'] = $this->unit->findAll();
-        // $data['perihal'] = $this->perihal->findAll();
-        // $data['pengesah'] = $this->pengesah->where('hide', 0)->findAll();
-        // $data['jenis'] = $this->jenis->findAll();
-        // return view('surat/keluar/new', $data);
+        $data['title'] = 'Ambil Nomor Susun Surat Keluar';
+        $data['unit'] = $this->unit->findAll();
+        $data['perihal'] = $this->perihal->findAll();
+        $data['pengesah'] = $this->pengesah->where('hide', 0)->findAll();
+        $data['jenis'] = $this->jenis->findAll();
+        return view('surat/keluar/new', $data);
     }
 
     public function insertkeluar()
@@ -125,6 +131,9 @@ class Surat extends BaseController
             $data['nourut'] = $this->keluar->getLastNomor()->nourut + 1;
             $tahun = date('Y', strtotime($data['tanggal']));
             $data['tahun'] = $tahun;
+            if ($tahun < date('Y')){
+                return redirect()->back()->withInput()->with('error', 'Anda sudah tidak boleh mengambil nomor surat untuk tahun '. $tahun.'.');
+            }
             $pengesah = $this->pengesah->find($data['pengesah'])->kode;
             $perihal = $this->perihal->find($data['perihal'])->kode;
             $unit = $this->unit->find($data['unit'])->kode;
@@ -157,21 +166,18 @@ class Surat extends BaseController
     {
         $data['title'] = 'Nomor Susun Surat Keluar';
         $data['keluar'] = $this->keluar->getByID($id);
-        // print_r($data['keluar']);
         return view('surat/keluar/invoice', $data);
     }
 
     public function booking()
     {
-        return redirect()->to('http://10.12.100.251/surat');
-
-        // $data['title'] = 'Booking Nomor Susun Surat Keluar';
-        // if (session('role') != 'admin') {
-        //     $data['booking'] = $this->keluar->getBookingByUser(session('id'));
-        // } else {
-        //     $data['booking'] = $this->keluar->getBooking();
-        // }
-        // return view('surat/keluar/booking', $data);
+        $data['title'] = 'Booking Nomor Susun Surat Keluar';
+        if (session('role') != 'admin') {
+            $data['booking'] = $this->keluar->getBookingByUser(session('id'));
+        } else {
+            $data['booking'] = $this->keluar->getBooking();
+        }
+        return view('surat/keluar/booking', $data);
     }
 
     public function deletemasuk($id)

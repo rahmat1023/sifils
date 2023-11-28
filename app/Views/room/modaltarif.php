@@ -12,8 +12,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Tarif <small>(Kosongkan bila tidak berbayar)</small></label>
-                            <input type="number" class="form-control" name="biaya" placeholder="Tarif">
+                            <label>Tarif <small>(Isikan 0 bila tidak berbayar)</small></label>
+                            <input type="number" class="form-control" name="biaya" value="0">
                         </div>
 
                     </div>

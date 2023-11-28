@@ -42,6 +42,7 @@ class Auth extends BaseController
                         'role' => $user->role,
                         'roleid' => $roleid,
                         'surat' => $user->role_surat,
+                        'ruang' => $user->role_ruang,
                     ];
                     session()->set($params);
                     print_r(session('id'));
@@ -65,6 +66,7 @@ class Auth extends BaseController
             'role',
             'roleid',
             'surat',
+            'ruang',
         ];
         session()->remove($params);
         return redirect()->to(site_url('login'));

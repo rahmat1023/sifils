@@ -13,6 +13,8 @@
             <form action="<?= site_url('users/' . $user->id); ?>" method="post" autocomplete="off">
                 <?= csrf_field(); ?>
                 <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="oldpass" value= <?=$user->password?>>
+
                 <div class="card-body">
                     <div class="form-group">
                         <label>Nama</label>
@@ -39,6 +41,13 @@
                             <option value="employee" <?= $user->role == 'employee' ? 'selected' : ''; ?>>Tendik</option>
                             <option value="satpam" <?= $user->role == 'satpam' ? 'selected' : ''; ?>>Satpam</option>
                             <option value="user" <?= $user->role == 'user' ? 'selected' : ''; ?>>User</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hak Surat</label>
+                        <select class="form-control" name="role_surat">
+                            <option value= '1' <?= $user->role_surat == 1 ? 'selected' : ''; ?>>Admin</option>
+                            <option value= '0' <?= $user->role_surat == 0 ? 'selected' : ''; ?>>Bukan Admin</option>
                         </select>
                     </div>
                 </div>

@@ -120,7 +120,7 @@
                         </div>
                         <div class="form-group col-12 col-lg-4">
                             <label>Tanggal</label>
-                            <input type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d', strtotime("$room->start")); ?>" required>
+                            <input onkeydown="return false" type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d', strtotime("$room->start")); ?>" required>
                         </div>
                         <div class="form-group col-6 col-lg-2">
                             <label>Waktu Mulai</label>

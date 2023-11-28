@@ -34,7 +34,7 @@
         <section class="section">
             <div class="container mt-5">
                 <div class="login-brand">
-                    SiFilsafat v2
+                    SiFilsafat
                     <!-- <img src="<?= base_url() ?>/stisla/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle"> -->
                 </div>
 
@@ -64,7 +64,7 @@
                                                     <label class="custom-control-label" for="cbx-1"></label>
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="badge badge-pill badge-primary mb-1 float-right"><?= $start . ' ' . $end; ?></div>
+                                                    <div class="badge badge-pill badge-primary mb-1 float-right"><?= $start . ' - ' . $end; ?></div>
                                                     <h6 class="media-title"><a href="#"><?= $row->name; ?></a></h6>
                                                     <div class="text-small text-muted">
                                                         <?= $row->ruangname; ?>

@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="form-group col-12 col-lg-8">
                                 <label>Nama Kegiatan</label>
-                                <input type="text" class="form-control" name="name" value="<?= old('name') ?>" required autofocus>
+                                <input type="text" class="form-control" name="name" value="<?= old('name') ?>" required autofocus autocomplete="on">
                             </div>
 
                             <div class="col-12 col-md-4">
@@ -47,12 +47,12 @@
                         <div class="row">
                             <div class="form-group col-12 col-lg-4">
                                 <label>PIC Kegiatan</label>
-                                <input type="text" class="form-control" name="pic" value="<?= old('pic'); ?>" required>
+                                <input type="text" class="form-control" name="pic" value="<?= old('pic'); ?>" required  autocomplete="on">
                             </div>
 
                             <div class="form-group col-12 col-lg-4">
                                 <label>No Handphone</label>
-                                <input type="number" class="form-control" name="phone" value="<?= old('phone'); ?>" required>
+                                <input type="number" class="form-control" name="phone" value="<?= old('phone'); ?>" required  autocomplete="on">
                             </div>
 
                             <div class="form-group col-12 col-lg-4">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="form-group col-12 col-lg-4">
                                 <label>Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal" value="<?= old('tanggal'); ?>" required>
+                                <input onkeydown="return false" type="date" class="form-control" name="tanggal" value="<?= old('tanggal'); ?>" required>
                             </div>
                             <div class="form-group col-6 col-lg-2">
                                 <label>Waktu Mulai</label>
