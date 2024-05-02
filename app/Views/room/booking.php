@@ -47,12 +47,12 @@
                         <div class="row">
                             <div class="form-group col-12 col-lg-4">
                                 <label>PIC Kegiatan</label>
-                                <input type="text" class="form-control" name="pic" value="<?= old('pic'); ?>" required  autocomplete="on">
+                                <input type="text" class="form-control" name="pic" value="<?= old('pic'); ?>" required autocomplete="on">
                             </div>
 
                             <div class="form-group col-12 col-lg-4">
                                 <label>No Handphone</label>
-                                <input type="number" class="form-control" name="phone" value="<?= old('phone'); ?>" required  autocomplete="on">
+                                <input type="number" class="form-control" name="phone" value="<?= old('phone'); ?>" required autocomplete="on">
                             </div>
 
                             <div class="form-group col-12 col-lg-4">
@@ -139,18 +139,40 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="alat">Alat</label>
                                     <textarea name="alat" id="alat" id="alat" class="form-control" placeholder="Daftar alat yang diperlukan" rows="8"> <?= old('alat'); ?></textarea>
                                 </div>
                             </div>
+                            <div class="form-group col-12 col-md-2">
+                                <label>Keamanan</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="keamanan" value="<?= old('keamanan') ?>">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            Orang
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="ket">Catatan</label>
                                     <textarea class="form-control" type="text" name="ket" id="ket" placeholder="Catatan dari Fakultas" rows="8"> <?= old('ket'); ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-2">
+                                <label>Kebersihan</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="kebersihan" value="<?= old('kebersihan') ?>">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            Orang
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
